@@ -12,14 +12,14 @@ describe('Automatic testing of Wikipedia search', () => {
     cy.get("#toc > ul").should('contain', 'Personal life')
   })
 
-  it('Verifies page exist translations in english, spanish and german', () => {
+  it('Verifies page translation in english, spanish and german exists', () => {
     //verifies that current page is in english
     cy.url().should('contains', 'en')
     
     //verifies that the page exists in spanish and german
-    cy.contains("Deutsch").click().url().should('contains', '/Arnold_Schwarzenegger')
+    cy.get("#p-lang").contains("Deutsch").click().get("#bodyContent").should('contain', 'Arnold Schwarzenegger')
     cy.go("back")
-    cy.contains("Español").click().url().should('contains', '/Arnold_Schwarzenegger')
+    cy.get("#p-lang").contains("Español").click().get("#bodyContent").should('contain', 'Arnold Schwarzenegger')
     cy.go("back")
   })
 
